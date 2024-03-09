@@ -7,6 +7,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\Admin\MainController as AdminMainController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\TypeController as AdminTypeController;
+use App\Http\Controllers\Admin\TechnologyController as AdminTechnologyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ use App\Http\Controllers\Admin\TypeController as AdminTypeController;
 
 Route::get('/', [MainController::class, 'index'])->name('home');
 
+
 Route::prefix('admin')
     ->name('admin.')
     ->middleware('auth')
@@ -31,6 +33,7 @@ Route::prefix('admin')
     Route::resource('projects',ProjectController::class);
 
     Route::resource('types',AdminTypeController::class);
+    Route::resource('technologies', AdminTechnologyController::class);
 });
 
 require __DIR__.'/auth.php';
