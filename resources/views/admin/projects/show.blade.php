@@ -12,10 +12,8 @@
                 </h1>
 
                 <h2>
-                   Tipologia di progetto: {{ $project->type->title }}
+                   {{-- Tipologia di progetto: {{ $project->type->title }} --}}
                 </h2>
-
-                <h2>
                     <div>
                         Technologies:
                         @forelse ($project->technologies as $technology)
@@ -27,7 +25,14 @@
                             -
                         @endforelse
                     </div>
-                </h2>
+
+                    @if ($project->cover_img != null)
+                        <div class="my-3">
+                            <img src="{{ asset('storage/'.$project->cover_img) }}" style="max-width: 400px;">
+                        </div>
+                    @endif
+
+
                 <h2>
                     Slug: {{ $project->slug }}
                 </h2>

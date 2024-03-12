@@ -11,6 +11,7 @@ use App\Models\Type;
 
 // Helpers
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 //Form Request
 use App\Http\Requests\StoreProjectRequest;
@@ -45,6 +46,11 @@ class ProjectController extends Controller
         
         $validationData=$request->validated();
 
+        $coverImgPath = null;
+        if (isset($validationData['cover_img'])) {
+        $coverImgPath = Storage::disk('public')->put('', $validationData['cover_img']);
+        }
+
         $slug = Str::slug($validationData['title']);
       
 
@@ -54,6 +60,7 @@ class ProjectController extends Controller
             'title' => $validationData['title'],
             'slug' => $slug,
             'content'=> $validationData['content'],
+            'cover_img'=> $coverImgPath,
         ]);
 
         return redirect()->route('admin.projects.show', ['project' => $project->slug]);
